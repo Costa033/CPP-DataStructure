@@ -101,6 +101,101 @@ public:
 		return found;
 	}
 
+	void InsertBefore(int newValue, int item)
+	{
+		if (IsEmpty())
+		{
+			InsertFirst(newValue);
+			cout << "the list was empty so we insert it as first node\n";
+		}
+		else
+
+		{
+			if (IsFound(item))
+			{
+				Node* temp = head;
+
+				while (temp->next->data != item && temp != NULL)
+				{
+					temp = temp->next;
+				}
+
+				Node* nwNode = new Node();
+				nwNode->data = newValue;
+				nwNode->next = temp->next;
+				temp->next = nwNode;
+			}
+			else
+			{
+				cout << "the item you want to insert before is not exist\n";
+			}
+		}
+
+	}
+
+	void append(int lastValue)
+	{
+		if (IsEmpty())
+		{
+			InsertFirst(lastValue);
+			cout << "the list was empty so we insert it as first node\n";
+		}
+		else
+		{
+			Node* temp = head;
+
+			while (temp->next != NULL)
+			{
+				temp = temp->next;
+			}
+
+			Node* nwNode = new Node();
+			nwNode->data = lastValue;
+			nwNode->next = temp->next;
+			temp->next = nwNode;
+
+		}
+
+	}
+
+	void remove(int item)
+	{
+		if (IsEmpty())
+
+		{
+			cout << "The list is Empty, no items to delete\n";
+		}
+		else
+		{
+			if (IsFound(item))
+			{
+				Node* del = head;
+				if (head->data == item)
+				{
+					head = head->next;
+					delete del;
+				}
+				else
+				{
+					while (del->next->data != item)
+					{
+						del = del->next;
+					}
+
+					Node* deleto = del->next;
+					del->next = deleto->next;
+					delete deleto;
+				}
+			}
+			else
+			{
+				cout << "the item you want to delete is not exist\n";
+			}
+		}
+		
+
+	}
+
 };
 
 
@@ -133,6 +228,33 @@ int main()
 		cout << "the item is found\n";
 	else
 		cout << "the item is not found\n";
+
+	/*  INSERT BEFORE */
+
+	cout << "enter the value you want to insert it\n";
+	int item0;
+	int newVal;
+	cin >> newVal;
+	cout << "enter the item you want to insert the value before it\n";
+	cin >> item0;
+
+	lis1.InsertBefore(newVal, item0);
+	lis1.display();
+
+
+	/* APPEND */
+	cout << "enter the value you want to append it\n";
+	cin >> item;
+
+	lis1.append(item);
+	lis1.display();
+
+	/* DELETE */
+	cout << "enter the value you want to delete it\n";
+	cin >> item;
+
+	lis1.remove(item);
+	lis1.display();
 
 
 
